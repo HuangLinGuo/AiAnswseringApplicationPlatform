@@ -1,23 +1,25 @@
 package com.hlg.aap.model.enums;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * 文件上传业务类型枚举
+ * App评分策略类型枚举
  *
  */
-public enum FileUploadBizEnum {
+public enum AppScoringStrategyEnum {
 
-    USER_AVATAR("用户头像", "user_avatar");
+    CUSTOM("自定义",0),
+    AI("AI",1);
 
     private final String text;
 
-    private final String value;
+    private final int value;
 
-    FileUploadBizEnum(String text, String value) {
+    AppScoringStrategyEnum(String text, int value) {
         this.text = text;
         this.value = value;
     }
@@ -27,7 +29,7 @@ public enum FileUploadBizEnum {
      *
      * @return
      */
-    public static List<String> getValues() {
+    public static List<Integer> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
     }
 
@@ -37,19 +39,19 @@ public enum FileUploadBizEnum {
      * @param value
      * @return
      */
-    public static FileUploadBizEnum getEnumByValue(String value) {
+    public static AppScoringStrategyEnum getEnumByValue(int value) {
         if (ObjectUtils.isEmpty(value)) {
             return null;
         }
-        for (FileUploadBizEnum anEnum : FileUploadBizEnum.values()) {
-            if (anEnum.value.equals(value)) {
+        for (AppScoringStrategyEnum anEnum : AppScoringStrategyEnum.values()) {
+            if (anEnum.value == value) {
                 return anEnum;
             }
         }
         return null;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
